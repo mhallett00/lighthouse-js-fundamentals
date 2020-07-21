@@ -1,77 +1,131 @@
+const { string } = require("prop-types");
+
 const makeCase = function(input, casing) {
   // Put your solution here
+  let inputInProcess = input;
+  let finalStr = "";
+  casings = prioritzeCasings(convertCasingToArray(casing));
   
-  let newStr = '';
-  //console.log(casing);
-  switch(casing) {
-    case "camel":
-      for (let j = 0; j < input.length; j++){
-        if (input.charAt(j-1) === " ") {
-          newStr += input[j].toUpperCase();
-        } else if (input.charAt(j) === " ") {
-          newStr += "";
-        } else {
-          newStr += input[j];
+  for (casing of casings) {
+    let stringInProcess = "";
+
+    switch(casing) {
+      case "camel":
+        for (let j = 0; j < inputInProcess.length; j++){
+          if (inputInProcess.charAt(j-1) === " ") {
+            stringInProcess += inputInProcess[j].toUpperCase();
+          } else if (inputInProcess.charAt(j) === " ") {
+            stringInProcess += "";
+          } else {
+            stringInProcess += inputInProcess[j];
+          }
         }
-      }
-      break;
-    case "pascal":
-      for (let j = 0; j < input.length; j++){
-        if (input.charAt(j-1) === " " || j === 0) {
-          newStr += input[j].toUpperCase();
-        } else if (input.charAt(j) === " ") {
-          newStr += "";
-        } else {
-          newStr += input[j];
+        break;
+      case "pascal":
+        for (let j = 0; j < inputInProcess.length; j++){
+          if (inputInProcess.charAt(j-1) === " " || j === 0) {
+            stringInProcess += inputInProcess[j].toUpperCase();
+          } else if (inputInProcess.charAt(j) === " ") {
+            stringInProcess += "";
+          } else {
+            stringInProcess += inputInProcess[j];
+          }
         }
-      }
-      break;
-    case "snake":
-      for (let j = 0; j < input.length; j++){
-        if (input.charAt(j) === " ") {
-          newStr += input[j].replace(' ', '_');
-        } else {
-          newStr += input[j];
+        break;
+      case "snake":
+        for (let j = 0; j < inputInProcess.length; j++){
+          if (inputInProcess.charAt(j) === " ") {
+            stringInProcess += inputInProcess[j].replace(' ', '_');
+          } else {
+            stringInProcess += inputInProcess[j];
+          }
         }
-      }
-      break;
-    case "kebab":
-      for (let j = 0; j < input.length; j++){
-        if (input.charAt(j) === " ") {
-          newStr += input[j].replace(' ', '-');
-        } else {
-          newStr += input[j];
+        break;
+      case "kebab":
+        for (let j = 0; j < inputInProcess.length; j++){
+          if (inputInProcess.charAt(j) === " ") {
+            stringInProcess += inputInProcess[j].replace(' ', '-');
+          } else {
+            stringInProcess += inputInProcess[j];
+          }
         }
-      }
-      break;
-    case "title":
-      for (let j = 0; j < input.length; j++){
-        if (input.charAt(j-1) === " " || j === 0) {
-          newStr += input[j].toUpperCase();
-        } else {
-          newStr += input[j];
+        break;
+      case "title":
+        for (let j = 0; j < inputInProcess.length; j++){
+          if (inputInProcess.charAt(j-1) === " " || j === 0) {
+            stringInProcess += inputInProcess[j].toUpperCase();
+          } else {
+            stringInProcess += inputInProcess[j];
+          }
         }
-      }
-      break;  
-    case "vowel":
-      newStr = input.replace(/[aeiou]/g, function (vowels){
-        return vowels.toUpperCase();
-      });
-      break;
-    case "consonant":
-      newStr = input.replace(/[bcdfghjklmnpqrstvwxyz]/g, function (consonants){
-        return consonants.toUpperCase();
-      });
-      break;
-    case "upper":
-      newStr = input.toUpperCase();
-      break;
-    default:
-      newStr = input;
-      break;
+        break;  
+      case "vowel":
+        stringInProcess = inputInProcess.replace(/[aeiou]/g, function (vowels){
+          return vowels.toUpperCase();
+        });
+        break;
+      case "consonant":
+        stringInProcess = inputInProcess.replace(/[bcdfghjklmnpqrstvwxyz]/g, function (consonants){
+          return consonants.toUpperCase();
+        });
+        break;
+      case "upper":
+        stringInProcess = inputInProcess.toUpperCase();
+        break;
+      case "lower":
+        stringInProcess = inputInProcess.toLowerCase();
+        break;
+      default:
+        stringInProcess = inputInProcess;
+        break;
+    }
+    inputInProcess = stringInProcess;
+    finalStr = stringInProcess;
   }
-  return newStr;
+  return finalStr;
 };
+
+const convertCasingToArray = (casings) => {
+  const casingsArr = [];
+  if (!Array.isArray(casings)) {
+    casingsArr.push(casings);
+    return casingsArr;
+  } else {
+    return casings
+  }
+}
+
+const prioritzeCasings = (casings) => {
+
+  let primaryCasings = [];
+  let secondaryCasings = [];
+  let tertiaryCasings = [];
+  let prioritizedCasings = [];
+
+  for (casing of casings) {
+    switch(casing) {
+      case "camel":
+      case "pascal":
+      case "snake":
+      case "kebab":
+      case "title":
+        primaryCasings.push(casing);
+        break;
+      case "vowel":
+      case "consonant":
+        secondaryCasings.push(casing);
+        break;
+      case "upper":
+      case "lower":
+        tertiaryCasings.push(casing);
+        break;
+      default:
+        console.log("invalid case");
+        break;
+    }
+  }
+  return prioritizedCasings = primaryCasings.concat(secondaryCasings, tertiaryCasings);
+}
 
 console.log(makeCase("this is a string", "camel"));
 console.log(makeCase("this is a string", "pascal"));
@@ -81,3 +135,5 @@ console.log(makeCase("this is a string", "title"));
 console.log(makeCase("this is a string", "vowel"));
 console.log(makeCase("this is a string", "consonant"));
 console.log(makeCase("this is a string", ["upper", "snake"]));
+console.log(makeCase("this is a string", ["lower", "title"]), "===", "this is a string");
+console.log(makeCase("this is a string", ["lower", "vowel", "upper", "pascal", "consonant", "snake", "kebab", "title"]), "===", "THISISASTRING");
