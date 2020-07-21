@@ -22,7 +22,6 @@ console.log(urlDecode("city=Vancouver&weather=lots%20of%20rain").weather);
 
 // EXPECTED OUTPUT
 
-
 // {duck: "rubber"}
 // {bootcamp: "Lighthouse Labs"}
 // {city: "Vancouver", weather: "lots of rain"}
