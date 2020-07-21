@@ -120,7 +120,7 @@ const prioritzeCasings = (casings) => {
         tertiaryCasings.push(casing);
         break;
       default:
-        console.log("invalid case");
+        console.log(`"${casing}" was ignored as an invalid case`);
         break;
     }
   }
@@ -136,4 +136,4 @@ console.log(makeCase("this is a string", "vowel"));
 console.log(makeCase("this is a string", "consonant"));
 console.log(makeCase("this is a string", ["upper", "snake"]));
 console.log(makeCase("this is a string", ["lower", "title"]), "===", "this is a string");
-console.log(makeCase("this is a string", ["lower", "vowel", "upper", "pascal", "consonant", "snake", "kebab", "title"]), "===", "THISISASTRING");
+console.log(makeCase("this is a string", ["lower", "vowel", "upper", "pascal", "consonant", "snake", "kebab", "title", "scramble"]), "===", "THISISASTRING");
