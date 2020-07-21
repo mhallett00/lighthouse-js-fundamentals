@@ -4,7 +4,7 @@ const makeCase = function(input, casing) {
   // Put your solution here
   let inputInProcess = input;
   let finalStr = "";
-  casings = prioritzeCasings(convertCasingToArray(casing));
+  const casings = prioritzeCasings(convertCasingToArray(casing));
   
   for (casing of casings) {
     let stringInProcess = "";
@@ -97,9 +97,9 @@ const convertCasingToArray = (casings) => {
 
 const prioritzeCasings = (casings) => {
 
-  let primaryCasings = [];
-  let secondaryCasings = [];
-  let tertiaryCasings = [];
+  const primaryCasings = [];
+  const secondaryCasings = [];
+  const tertiaryCasings = [];
   let prioritizedCasings = [];
 
   for (casing of casings) {
