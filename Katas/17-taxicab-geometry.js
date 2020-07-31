@@ -4,34 +4,19 @@ const blocksAway = function (directions) {
   const blocksMoved = { north: 0, east: 0, south: 0, west: 0 };
   let currentDirection = null;
 
+  const cardinalObj = {
+    north: ["west", "east"],
+    east: ["north", "south"],
+    south: ["east", "west"],
+    west: ["south", "north"],
+  };
+
   for (let i = 0; i < directions.length; i += 2) {
     if (currentDirection) {
-      switch (currentDirection) {
-        case "north":
-          directions[i] === "left"
-            ? (currentDirection = "west")
-            : (currentDirection = "east");
-          blocksMoved[currentDirection] += directions[i + 1];
-          break;
-        case "east":
-          directions[i] === "left"
-            ? (currentDirection = "north")
-            : (currentDirection = "south");
-          blocksMoved[currentDirection] += directions[i + 1];
-          break;
-        case "south":
-          directions[i] === "left"
-            ? (currentDirection = "east")
-            : (currentDirection = "west");
-          blocksMoved[currentDirection] += directions[i + 1];
-          break;
-        case "west":
-          directions[i] === "left"
-            ? (currentDirection = "south")
-            : (currentDirection = "north");
-          blocksMoved[currentDirection] += directions[i + 1];
-          break;
-      }
+      directions[i] === "left"
+        ? (currentDirection = cardinalObj[currentDirection][0])
+        : (currentDirection = cardinalObj[currentDirection][1]);
+      blocksMoved[currentDirection] += directions[i + 1];
     } else {
       directions[i] === "left"
         ? (currentDirection = "north")
