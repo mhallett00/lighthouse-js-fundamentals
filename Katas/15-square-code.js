@@ -35,7 +35,6 @@ const buildString = (inputArr, sqrtString) => {
 const squareCode = (inputString) => {
   let stripString = inputString.replace(/\s/g, "");
   let stringSqrt = Math.ceil(Math.sqrt(stripString.length));
-  let finalString = "";
 
   return buildString(recurseString(stripString, "", stringSqrt), stringSqrt);
 };

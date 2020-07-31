@@ -1,9 +1,15 @@
-const numberOfVowels = function(data) {
+const numberOfVowels = function (data) {
   // Put your solution here
-  let numVowels = 0
+  let numVowels = 0;
   //Looping the array's index looking for vowels
-  for (i = 0; i < data.length; i++){
-    if (data[i] === 'a' || data[i] === 'e' || data[i] === 'i' ||data[i] === 'o' || data[i] === 'u'){
+  for (let i = 0; i < data.length; i++) {
+    if (
+      data[i] === "a" ||
+      data[i] === "e" ||
+      data[i] === "i" ||
+      data[i] === "o" ||
+      data[i] === "u"
+    ) {
       numVowels++;
     }
   }

@@ -1,18 +1,16 @@
-const { string } = require("prop-types");
-
-const makeCase = function(input, casing) {
+const makeCase = function (input, casing) {
   // Put your solution here
   let inputInProcess = input;
   let finalStr = "";
   const casings = prioritzeCasings(convertCasingToArray(casing));
-  
+
   for (casing of casings) {
     let stringInProcess = "";
 
-    switch(casing) {
+    switch (casing) {
       case "camel":
-        for (let j = 0; j < inputInProcess.length; j++){
-          if (inputInProcess.charAt(j-1) === " ") {
+        for (let j = 0; j < inputInProcess.length; j++) {
+          if (inputInProcess.charAt(j - 1) === " ") {
             stringInProcess += inputInProcess[j].toUpperCase();
           } else if (inputInProcess.charAt(j) === " ") {
             stringInProcess += "";
@@ -22,8 +20,8 @@ const makeCase = function(input, casing) {
         }
         break;
       case "pascal":
-        for (let j = 0; j < inputInProcess.length; j++){
-          if (inputInProcess.charAt(j-1) === " " || j === 0) {
+        for (let j = 0; j < inputInProcess.length; j++) {
+          if (inputInProcess.charAt(j - 1) === " " || j === 0) {
             stringInProcess += inputInProcess[j].toUpperCase();
           } else if (inputInProcess.charAt(j) === " ") {
             stringInProcess += "";
@@ -33,41 +31,44 @@ const makeCase = function(input, casing) {
         }
         break;
       case "snake":
-        for (let j = 0; j < inputInProcess.length; j++){
+        for (let j = 0; j < inputInProcess.length; j++) {
           if (inputInProcess.charAt(j) === " ") {
-            stringInProcess += inputInProcess[j].replace(' ', '_');
+            stringInProcess += inputInProcess[j].replace(" ", "_");
           } else {
             stringInProcess += inputInProcess[j];
           }
         }
         break;
       case "kebab":
-        for (let j = 0; j < inputInProcess.length; j++){
+        for (let j = 0; j < inputInProcess.length; j++) {
           if (inputInProcess.charAt(j) === " ") {
-            stringInProcess += inputInProcess[j].replace(' ', '-');
+            stringInProcess += inputInProcess[j].replace(" ", "-");
           } else {
             stringInProcess += inputInProcess[j];
           }
         }
         break;
       case "title":
-        for (let j = 0; j < inputInProcess.length; j++){
-          if (inputInProcess.charAt(j-1) === " " || j === 0) {
+        for (let j = 0; j < inputInProcess.length; j++) {
+          if (inputInProcess.charAt(j - 1) === " " || j === 0) {
             stringInProcess += inputInProcess[j].toUpperCase();
           } else {
             stringInProcess += inputInProcess[j];
           }
         }
-        break;  
+        break;
       case "vowel":
-        stringInProcess = inputInProcess.replace(/[aeiou]/g, function (vowels){
+        stringInProcess = inputInProcess.replace(/[aeiou]/g, function (vowels) {
           return vowels.toUpperCase();
         });
         break;
       case "consonant":
-        stringInProcess = inputInProcess.replace(/[bcdfghjklmnpqrstvwxyz]/g, function (consonants){
-          return consonants.toUpperCase();
-        });
+        stringInProcess = inputInProcess.replace(
+          /[bcdfghjklmnpqrstvwxyz]/g,
+          function (consonants) {
+            return consonants.toUpperCase();
+          }
+        );
         break;
       case "upper":
         stringInProcess = inputInProcess.toUpperCase();
@@ -91,19 +92,17 @@ const convertCasingToArray = (casings) => {
     casingsArr.push(casings);
     return casingsArr;
   } else {
-    return casings
+    return casings;
   }
-}
+};
 
 const prioritzeCasings = (casings) => {
-
   const primaryCasings = [];
   const secondaryCasings = [];
   const tertiaryCasings = [];
-  let prioritizedCasings = [];
 
-  for (casing of casings) {
-    switch(casing) {
+  for (let casing of casings) {
+    switch (casing) {
       case "camel":
       case "pascal":
       case "snake":
@@ -124,8 +123,8 @@ const prioritzeCasings = (casings) => {
         break;
     }
   }
-  return prioritizedCasings = primaryCasings.concat(secondaryCasings, tertiaryCasings);
-}
+  return primaryCasings.concat(secondaryCasings, tertiaryCasings);
+};
 
 console.log(makeCase("this is a string", "camel"));
 console.log(makeCase("this is a string", "pascal"));
@@ -135,5 +134,23 @@ console.log(makeCase("this is a string", "title"));
 console.log(makeCase("this is a string", "vowel"));
 console.log(makeCase("this is a string", "consonant"));
 console.log(makeCase("this is a string", ["upper", "snake"]));
-console.log(makeCase("this is a string", ["lower", "title"]), "===", "this is a string");
-console.log(makeCase("this is a string", ["lower", "vowel", "upper", "pascal", "consonant", "snake", "kebab", "title", "scramble"]), "===", "THISISASTRING");
+console.log(
+  makeCase("this is a string", ["lower", "title"]),
+  "===",
+  "this is a string"
+);
+console.log(
+  makeCase("this is a string", [
+    "lower",
+    "vowel",
+    "upper",
+    "pascal",
+    "consonant",
+    "snake",
+    "kebab",
+    "title",
+    "scramble",
+  ]),
+  "===",
+  "THISISASTRING"
+);

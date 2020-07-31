@@ -1,17 +1,17 @@
-const conditionalSum = function(values, condition) {
+const conditionalSum = function (values, condition) {
   // Your code here
   let numArr = [];
-  for (i = 0; i < values.length; i++){
+  for (let i = 0; i < values.length; i++) {
     //pushing even or odd numbers to array
-    if (condition === "even" && values[i] % 2 === 0){
+    if (condition === "even" && values[i] % 2 === 0) {
       numArr.push(values[i]);
     } else if (condition === "odd" && values[i] % 2 != 0) {
       numArr.push(values[i]);
     }
   }
   //checking for an empty array to return 0
-  if (numArr.length === 0){
-    return numArr = 0;
+  if (numArr.length === 0) {
+    return (numArr = 0);
   } else {
     return numArr;
   }
